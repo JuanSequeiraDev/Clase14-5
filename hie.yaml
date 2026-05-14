@@ -1,0 +1,7 @@
+cradle:
+  stack:
+    - path: "./src"
+      component: "mi-proyecto:lib"
+
+    - path: "./test"
+      component: "mi-proyecto:test:mi-proyecto-test"

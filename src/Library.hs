@@ -1,7 +1,7 @@
 module Library where
 import PdePreludat
 
-data Heroe = Heroe
+data Heroe = UnHeroe
   { defensa :: Number,
     salud :: Number,
     ataque :: Number
@@ -10,7 +10,11 @@ data Heroe = Heroe
 type Modificacion = Number -> Number
 
 pepita :: Heroe
-pepita = Heroe {defensa = 21, salud = 1001, ataque = 51}
+pepita = UnHeroe {
+  defensa = 21,
+  salud = 1001,
+  ataque = 51
+}
 
 
 type Pocion = Heroe -> Heroe
@@ -54,10 +58,10 @@ pocionArtesanal :: Number -> Pocion
 pocionArtesanal cant = pocionBase.cambiarAtaque (/cant).pocionBase
 
 pocionArriesgada :: Pocion
-pocionArriesgada = crazyPotion.(\heroe-> heroe {defensa = 3}).pocionBase
+pocionArriesgada = pocionBase.(\heroe-> heroe {defensa = 3}).crazyPotion
 
 licuadoDePociones :: Pocion -> Pocion
-licuadoDePociones pocion = pocionBase.pocion.pocionArtesanal (10)
+licuadoDePociones pocion = pocionArtesanal (10).pocion.pocionBase
 
 pocionGradual :: Pocion 
 pocionGradual heroe | ataque heroe > 100 = (cambiarDefensa (+50).pocionArtesanal (5)) heroe

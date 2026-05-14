@@ -35,7 +35,7 @@ pocionBase :: Pocion
 pocionBase heroe = sumarVida 10 heroe
 
 pocionPremium :: Pocion
-pocionPremium heroe = sumarVida 20 heroe
+pocionPremium = pocionBase.pocionBase
 
 crazyPotion :: Pocion
 crazyPotion =  cambiarSalud (*1.33).pocionPremium.cambiarAtaque (* 2) 
@@ -44,8 +44,7 @@ agua :: Pocion
 agua = id
 
 esPoderoso :: Heroe -> Bool
-esPoderoso heroe  | poder heroe > 100 = True
-                  | otherwise =  False
+esPoderoso heroe = poder heroe > 100
 
 pocionElite :: Pocion
 pocionElite heroe | esPoderoso heroe = cambiarDefensa (*10) heroe
